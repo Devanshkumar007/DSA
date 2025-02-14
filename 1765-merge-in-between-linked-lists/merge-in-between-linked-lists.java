@@ -18,7 +18,7 @@ class Solution {
         while(temp!=null){
             count++;
             if(count==a) ap = temp;
-            if(count==b) bp = temp;
+            if(count==b){ bp = temp; break;}
             temp = temp.next;
         }
         ap.next = list2;
