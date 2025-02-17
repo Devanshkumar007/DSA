@@ -10,10 +10,11 @@ class Solution {
         boolean[] visited = new boolean[isConnected.length];
         int count = 0;
         for(int i=0 ; i<visited.length ; i++){
-            if(!visited[i]&& isConnected[i][i]==1){
+            if(!visited[i]){
                 count ++ ;dfs(isConnected , i, visited);
             }
         }
+
     return count;
     }
 }
