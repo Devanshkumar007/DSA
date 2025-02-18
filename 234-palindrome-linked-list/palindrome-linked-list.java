@@ -11,16 +11,14 @@
 class Solution {
     ListNode head2 = null ;
     boolean ans = true ;
-    public void checking(ListNode head){
-        if(head.next==null) return ;
-        ListNode curr = head.next ;
-        checking(head.next);
-        if(head2.val!=curr.val) ans = false;
-        head2=head2.next; 
+    public boolean checking(ListNode head){
+        if(head==null) return true ;
+        boolean ans = checking(head.next) && (head2.val==head.val);
+        head2=head2.next;
+        return ans ; 
     }
     public boolean isPalindrome(ListNode head) {
         head2=head;
-        checking(head);
-        return ans;
+        return checking(head);
     }
 }
