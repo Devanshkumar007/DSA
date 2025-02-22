@@ -1,17 +1,11 @@
 class Solution {
     public int[] rearrangeArray(int[] nums) {
-        Queue<Integer> negative = new LinkedList<>();
-        Queue<Integer> positive = new LinkedList<>();
-        for(int i=0;i<nums.length ; i++){
-            if(nums[i]>0) positive.add(nums[i]);
-            else negative.add(nums[i]);
+        int[] ans = new int[nums.length];
+        int i=0; int j=1;
+        for(int k=0;k<nums.length; k++){
+            if(nums[k]>0){ ans[i]=nums[k]; i+=2;}
+            else{ ans[j]=nums[k]; j+=2;}
         }
-        for(int i=0 ;i<nums.length ; i++){
-            nums[i]=positive.remove();
-            i++;
-            nums[i]=negative.remove();
-        }
-        return nums;
-        
+        return ans;
     }
 }
