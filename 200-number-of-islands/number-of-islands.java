@@ -1,40 +1,45 @@
-public class Solution {
-    private int rows; 
-    private int cols; 
-    private int island = 0; 
-
-    public int numIslands(char[][] grid) {
-        rows = grid.length;
-        cols = grid[0].length;
-
-        for (int row = 0; row < rows; row++) {
-            search(grid, row); 
-        }
-
-        return island; 
+class Pair{
+    int i;
+    int j;
+    Pair(int i , int j){
+        this.i=i; this.j=j;
     }
-
-    public void search(char[][] grid, int row) {
-        char[] finalrow = grid[row];
-
-        for (int col = 0; col < cols; ++col) {
-            if (finalrow[col] == '1') { 
-                mark(grid, row, col); 
-                island++; 
+}
+class Solution {
+    public int numIslands(char[][] grid) {
+        int m = grid.length ; int n= grid[0].length;
+        boolean[][] visited = new boolean[m][n];
+        int islands = 0 ;
+        for(int i=0;i<m ; i++){
+            for(int j=0 ; j<n ; j++){
+                if(!visited[i][j] && grid[i][j]=='1'){
+                    islands++;
+                    bfs(i,j,visited,grid);
+                }
             }
         }
+        return islands;
     }
+    public void bfs(int i, int j , boolean[][] visited , char[][]grid){
+        
+        visited[i][j]=true;
+        Queue<Pair> q = new LinkedList<>();
+        q.add(new Pair(i,j));
 
-    public void mark(char[][] grid, int row, int col) {
-        grid[row][col] = '*'; 
-
-        if (row > 0 && grid[row - 1][col] == '1')
-            mark(grid, row - 1, col);
-        if (row + 1 < rows && grid[row + 1][col] == '1')
-            mark(grid, row + 1, col);
-        if (col > 0 && grid[row][col - 1] == '1')
-            mark(grid, row, col - 1);
-        if (col + 1 < cols && grid[row][col + 1] == '1')
-            mark(grid, row, col + 1);
+        int[][] dir = {{0,1},{0,-1},{-1,0},{1,0}};
+        while(!q.isEmpty()){
+            int r = q.peek().i;
+            int c = q.peek().j;
+            q.remove();
+            for(int k=0 ; k<4 ; k++){
+                int row = r + dir[k][0];
+                int col = c + dir[k][1];
+                if(row>=0 && row<grid.length && col>=0 && col<grid[0].length &&
+                !visited[row][col] && grid[row][col]=='1'){
+                    visited[row][col]=true;
+                    q.add(new Pair(row,col));
+                }
+            }
+        }
     }
 }
