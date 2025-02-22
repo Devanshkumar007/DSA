@@ -14,13 +14,13 @@
  * }
  */
 class FindElements {
-    TreeMap<Integer,Boolean> mp ;
+    HashMap<Integer,Boolean> mp ;
     public FindElements(TreeNode root) {
-        mp = new TreeMap<>();
+        mp = new HashMap<>();
         dfs(root,mp,0);
     }
 
-    public void dfs(TreeNode root,TreeMap<Integer,Boolean> mp, int i){
+    public void dfs(TreeNode root,HashMap<Integer,Boolean> mp, int i){
         if(root==null) {mp.put(i,false); return;}
         mp.put(i,true);
         dfs(root.left,mp,(2*i)+1);
