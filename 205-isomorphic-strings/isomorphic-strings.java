@@ -25,10 +25,6 @@ class Solution {
                 mp.put(c,s.charAt(i));
             }
         }
-
-
-
         return ans;
-
     }
 }
