@@ -5,11 +5,9 @@ class Solution {
         for(int i=0 ; i<s.length() ; i++){
             char c = s.charAt(i);
             if(mp.containsKey(c)){
-                //System.out.println("already");
                 char val = mp.get(c);
                 if(val!=t.charAt(i)) {ans=false; break;}
             }else{
-                //System.out.println("new");
                 mp.put(c,t.charAt(i));
             }
         }
@@ -17,11 +15,9 @@ class Solution {
         for(int i=0 ; i<s.length() ; i++){
             char c = t.charAt(i);
             if(mp.containsKey(c)){
-                //System.out.println("already");
                 char val = mp.get(c);
                 if(val!=s.charAt(i)) {ans=false; break;}
             }else{
-                //System.out.println("new");
                 mp.put(c,s.charAt(i));
             }
         }
