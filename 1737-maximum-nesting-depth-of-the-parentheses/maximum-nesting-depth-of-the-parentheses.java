@@ -1,15 +1,15 @@
 class Solution {
     public int maxDepth(String s) {
         int max = 0 ;
-        Stack<Character> st = new Stack<>();
+        int count = 0;
         for(int i=0 ; i<s.length() ; i++){
             char curr = s.charAt(i);
             if(curr=='(') {
-                st.push('(');
-                max= Math.max(max,st.size());
+                count++;
+                max= Math.max(max,count);
             }
             else if(curr==')'){
-                st.pop();
+                count--;
             }
         }
         return max;
