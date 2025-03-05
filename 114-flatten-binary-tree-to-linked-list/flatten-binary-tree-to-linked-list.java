@@ -14,9 +14,6 @@
  * }
  */
 class Solution {
-    public void preorder(TreeNode root){
-
-    }
     public void flatten(TreeNode root) {
         Stack<TreeNode> st = new Stack<>();
         TreeNode temp = root;
