@@ -1,36 +1,22 @@
 class Solution {
-    public void leftSmaller(List<Integer> sl, int a[])
-    {
-        Stack<Integer> st= new Stack<>();
-        for(int i=0 ; i<a.length ;i++){
-            while(!st.isEmpty() && a[st.peek()] >= a[i]) st.pop();
-            if(st.isEmpty()) sl.add(-1);
-            else sl.add(st.peek());
+    public int histogramArea(int histo[]) {
+        Stack < Integer > st = new Stack < > ();
+        int maxA = 0;
+        int n = histo.length;
+        for (int i = 0; i <= n; i++) {
+            while (!st.empty() && (i == n || histo[st.peek()] >= histo[i])) {
+                int height = histo[st.peek()];
+                st.pop();
+                int width;
+                if (st.empty())
+                    width = i;
+                else
+                    width = i - st.peek() - 1;
+                maxA = Math.max(maxA, width * height);
+            }
             st.push(i);
         }
-        
-    }
-    public void rightSmaller(List<Integer> sr, int a[]){
-        Stack<Integer> st= new Stack<>();
-        for (int i = a.length - 1; i >= 0; i--) {
-            while (!st.isEmpty() && a[st.peek()] >= a[i]) st.pop();
-            if (st.isEmpty()) sr.add(0, a.length);
-            else sr.add(0, st.peek()); 
-            st.push(i);
-        }
-    } 
-    public int histogramArea(int[] heights) {
-        List<Integer> left = new ArrayList<>();
-        List<Integer> right = new ArrayList<>();
-        leftSmaller(left,heights);
-        rightSmaller(right,heights);
-        int max = 0 ;
-        for(int i=0 ; i<heights.length; i++){
-            int width= right.get(i)- left.get(i) - 1;
-            int area = width * heights[i];
-            max= Math.max(max,area);
-        }
-        return max;
+        return maxA;
     }
 
     public int maximalRectangle(char[][] matrix) {
