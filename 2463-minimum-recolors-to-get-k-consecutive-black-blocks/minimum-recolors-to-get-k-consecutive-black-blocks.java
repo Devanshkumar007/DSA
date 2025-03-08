@@ -12,7 +12,7 @@ class Solution {
             if(blocks.charAt(i-1)=='W') curr--;
             if(blocks.charAt(i+k-1)=='W') curr++;
             ans=Math.min(ans,curr);
-            if(ans==0) break;
+            //if(ans==0) break;
         }
         return ans;
     }
