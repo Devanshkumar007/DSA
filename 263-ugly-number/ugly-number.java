@@ -16,11 +16,9 @@ class Solution {
         if (n > 2) {
             factors.add(n);
         }
-        ArrayList<Integer> sher = new ArrayList<>(factors);
-        for(int i=0;i<sher.size();i++){
-            if(sher.get(i)!=2 && sher.get(i)!=3 && sher.get(i)!=5){
-                return false;
-            }
+
+        for(int num : factors){
+            if(num!=2 && num!=3 && num!=5) return false;
         }
         return true;
     }
