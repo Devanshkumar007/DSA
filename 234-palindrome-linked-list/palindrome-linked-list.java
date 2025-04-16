@@ -10,15 +10,17 @@
  */
 class Solution {
     ListNode head2 = null ;
-    boolean ans = true ;
-    public boolean checking(ListNode head){
-        if(head==null) return true ;
-        boolean ans = checking(head.next) && (head2.val==head.val);
-        head2=head2.next;
-        return ans ; 
+    boolean flag = true;
+    public void check(ListNode head){
+        if(head==null) return ;
+        ListNode temp = head ;
+        check(head.next);
+        if(temp.val==head2.val) head2=head2.next;
+        else flag=false;
     }
     public boolean isPalindrome(ListNode head) {
-        head2=head;
-        return checking(head);
+        head2= head ;
+        check(head);
+        return flag ;
     }
 }
