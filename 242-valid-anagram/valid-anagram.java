@@ -4,8 +4,7 @@ class Solution {
         HashMap<Character,Integer> mp = new HashMap<>();
         for(int i=0 ; i<s.length() ; i++){
             if(mp.containsKey(s.charAt(i))){
-                int val = mp.get(s.charAt(i));
-                mp.put(s.charAt(i),val+1);
+                mp.put(s.charAt(i), mp.get(s.charAt(i))+1);
             }else{
                 mp.put(s.charAt(i),1);
             }
