@@ -15,6 +15,7 @@ class Solution {
         if(head==null) return ;
         ListNode temp = head ;
         check(head.next);
+        if(!flag) return;
         if(temp.val==head2.val) head2=head2.next;
         else flag=false;
     }
