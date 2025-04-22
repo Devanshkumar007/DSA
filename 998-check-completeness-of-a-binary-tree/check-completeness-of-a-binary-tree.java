@@ -19,25 +19,16 @@ class Solution {
         return 1 + countNodes(root.left)+countNodes(root.right);
     }
 
-    public void check(TreeNode root, int i, int[] arr){
-        if(root==null) return;
-        if(i>=arr.length) return ;
-        arr[i]=1; //System.out.println(i);
-        check(root.left,2*i,arr);
-        check(root.right,(2*i)+1,arr);
+    public boolean check(TreeNode root, int i, int nodes){
+        if(root==null) return true ;
+        if(i>=nodes+1) return false ;
+        return check(root.left,2*i,nodes) && check(root.right,(2*i)+1,nodes);
 
     }
 
     public boolean isCompleteTree(TreeNode root) {
         int nodes = countNodes(root);
-        int[] arr = new int[nodes+1];
-        check(root,1,arr);
-        for(int i=1 ; i<arr.length ; i++){
-            if(arr[i]==0) return false;
-            //System.out.println(i);
-        }
-        return true;
-
-
+        return check(root,1,nodes);
+        
     }
 }
