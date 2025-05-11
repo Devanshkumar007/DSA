@@ -1,37 +1,22 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
 class Solution {
-public void checking(TreeNode root, int targetSum ,List<List<Integer>> ans , List<Integer> inner){
-    if(root == null) return;
-    inner.add(root.val);
-    if(root.left==null && root.right==null && targetSum-root.val==0){ ans.add(new LinkedList<>(inner));}
-    else{
-        checking(root.left, targetSum-root.val, ans,inner);
-        checking(root.right, targetSum-root.val, ans,inner);
-    }
-    inner.remove(inner.size()-1);
-}
-
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-        List<List<Integer>> ans = new ArrayList<>();
-        if(root==null) return ans;
-        List<Integer> inner = new ArrayList<>();
-        checking(root,targetSum,ans,inner);
+        List<List<Integer>> result = new ArrayList<>();
+        dfs(root, targetSum, new ArrayList<>(), result);
+        return result;
+    }
 
-        return ans;
+    private void dfs(TreeNode node, int target, List<Integer> path, List<List<Integer>> result) {
+        if (node == null) return;
 
+        path.add(node.val);
+
+        if (node.left == null && node.right == null && node.val == target) {
+            result.add(new ArrayList<>(path));
+        } else {
+            dfs(node.left, target - node.val, path, result);
+            dfs(node.right, target - node.val, path, result);
+        }
+
+        path.remove(path.size() - 1);
     }
 }
