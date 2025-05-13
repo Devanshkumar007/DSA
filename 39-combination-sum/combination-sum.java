@@ -1,22 +1,21 @@
 class Solution {
-    List<List<Integer>> ans = new LinkedList<>();
-    List<Integer> inner = new LinkedList<>();
-    public void subset(int[] nums, int target , int curr ,int i){
-        if(curr==target){
-            ans.add(new LinkedList<>(inner));
-            return ;
+    public void possibleCombinations(int i, int[] candidates, int target, List<List<Integer>> ans , List<Integer> inner ){
+        if(target==0){
+            ans.add(new ArrayList<>(inner));
         }
-        if(i==nums.length || curr>target){
+        if(i == candidates.length || target <=0){
             return;
         }
-        inner.add(nums[i]);
-        subset(nums,target,curr+nums[i],i);
+        inner.add(candidates[i]);
+        possibleCombinations(i,candidates,target-candidates[i],ans,inner);
         inner.remove(inner.size()-1);
-        subset(nums,target,curr,i+1);
-
+        possibleCombinations(i+1,candidates,target,ans,inner);
     }
+
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        subset(candidates,target,0,0);
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> inner = new ArrayList<>();
+        possibleCombinations(0,candidates,target,ans,inner);
         return ans;
     }
 }
