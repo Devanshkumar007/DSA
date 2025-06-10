@@ -1,23 +1,13 @@
 class Solution {
     public int maxDifference(String s) {
-        HashMap<Character,Integer> mp = new HashMap<>();
-        int odd = Integer.MIN_VALUE ;
-        int even = Integer.MAX_VALUE ;
-        for(int i=0 ; i<s.length() ; i++){
-            char c = s.charAt(i);
-            if(mp.containsKey(c)){
-                int freq = mp.get(c)+1;
-                mp.put(c,freq);
-            }else{
-                mp.put(c,1);
-            }
-        }
+        int[] arr = new int[26];
+        for(int i=0 ; i<s.length() ; i++) arr[s.charAt(i) - 'a']++;
+        int odd = 0 ; int even = s.length();
+        for(int i=0 ; i<26 ; i++){
+            if(arr[i]%2==0 && arr[i] != 0 ) even = Math.min(even,arr[i]);
+            else odd = Math.max(odd,arr[i]);
+        } 
 
-        for(int v : mp.values()){
-            if(v%2==0) even = Math.min(even,v);
-            else odd = Math.max(odd,v);
-        }
-
-        return odd - even ;
+        return odd-even;
     }
 }
