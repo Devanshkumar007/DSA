@@ -1,26 +1,27 @@
 class Solution {
-    public String checkPalindrome(int l,int r,String s, String ans){
-        while(l>=0 && r<s.length()){
-            if(s.charAt(l)==s.charAt(r)) ans = s.charAt(l) + ans + s.charAt(r) ;
-            else break ; 
-            l--; r++;
+    public String check(int l , int r , char curr, String s){
+        StringBuilder sb = new StringBuilder();
+        if(curr!='.') sb.append(curr);
+        while(l>=0 && r<s.length() && s.charAt(l)==s.charAt(r)){
+            sb.insert(0,s.charAt(l--)); sb.append(s.charAt(r++));
         }
-        return ans;
+        return sb.toString();
     }
     public String longestPalindrome(String s) {
         String ans = "" ;
-        for(int i=0 ; i<s.length() ; i++){
-            //odd length 
-            int l = i-1 ; int r = i+1 ; String curr =""+ s.charAt(i); 
-            String odd = checkPalindrome(l,r,s,curr);
+        for(int i=0 ; i<s.length() ;i++){
+            //odd
+            int l=i-1 ,r =i+1 ; char curr =s.charAt(i);
+            String odd = check(l,r,curr,s);
 
-            //even length 
-            l=i ; r =i+1 ; curr="";
-            String even = checkPalindrome(l,r,s,curr);
+            //even 
+            l=i; curr='.';
+            String even = check(l,r,curr,s);
 
-            String check = odd.length() > even.length() ? odd : even;
-            ans = ans.length() > check.length() ? ans : check ;
+            String longest = (even.length()>odd.length()) ? new String(even) : new String(odd);
+            if(ans.length()<longest.length()) ans = new String(longest);
         }
+
         return ans;
     }
 }
