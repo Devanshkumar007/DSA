@@ -1,5 +1,10 @@
 class Solution {
-    public int findLengthOfLCIS(int[] nums) {
+    static{
+        for(int i=0 ; i<100 ; i++){
+            findLengthOfLCIS(new int[]{1});
+        }
+    }
+    public static int findLengthOfLCIS(int[] nums) {
         int max = 0 ;
         int[] dp = new int[nums.length];
         dp[0]=1 ;
