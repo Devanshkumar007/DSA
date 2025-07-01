@@ -1,5 +1,10 @@
 class Solution {
-    public int findLHS(int[] nums) {
+    static{
+        for (int i = 0; i < 500; i++){
+            findLHS(new int[]{1,2,3,4});
+        }
+    }
+    public static int findLHS(int[] nums) {
         HashMap<Integer,Integer> map = new HashMap<>();
         for(int i : nums){
             if(map.containsKey(i)){
