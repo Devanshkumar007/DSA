@@ -1,12 +1,11 @@
-class Solution {
-    static{
-        for(int i=0 ; i<100 ; i++)
-        possibleStringCount("a");
-    }
-    public static int possibleStringCount(String word) {
+class Solution{
+    public int possibleStringCount(String word) {
         int count = 1 ;
+        char prev = word.charAt(0);
         for(int i=0 ; i<word.length()-1 ; i++){
-            if(word.charAt(i)==word.charAt(i+1)) count++;
+            char curr = word.charAt(i+1);
+            if(prev==curr) count++;
+            prev=curr;
         }
         return count ;
     }
