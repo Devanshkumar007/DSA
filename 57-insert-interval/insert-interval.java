@@ -7,9 +7,6 @@ class Solution {
             ans.add(intervals[i]);
         }
         if(intervals.length==ans.size()) ans.add(newInterval); 
-        for(int j=0 ; j<ans.size() ; j++){
-            System.out.println(ans.get(j)[0]+" "+ans.get(j)[1]);
-        }
         int i= 1 ;
         List<int[]> out = new ArrayList<>();
         int start = ans.get(0)[0];
