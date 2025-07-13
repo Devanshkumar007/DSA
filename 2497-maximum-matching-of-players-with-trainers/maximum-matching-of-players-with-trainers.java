@@ -7,8 +7,9 @@ class Solution {
         int j=0;
         while(i<players.length && j<trainers.length){
             if(players[i]<=trainers[j]){
-                i++; j++; count++;
-            }else if(players[i]>trainers[j]) j++;
+                i++; count++;
+            }
+            j++;
         }
         return count;
     }
