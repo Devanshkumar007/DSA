@@ -1,5 +1,10 @@
 class Solution {
-    public int maximumUniqueSubarray(int[] nums) {
+    static{
+        for(int i=0;i<100;i++){
+            maximumUniqueSubarray(new int[] {});
+        }
+    }
+    public static int maximumUniqueSubarray(int[] nums) {
         int curr = 0 ;
         int max = 0 ;
         HashSet<Integer> hs = new HashSet<>();
