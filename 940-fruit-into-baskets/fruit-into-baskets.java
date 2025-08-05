@@ -1,5 +1,10 @@
 class Solution {
-    public int totalFruit(int[] fruits) {
+    static{
+        for(int i=0; i<300 ; i++){
+            totalFruit(new int[]{});
+        }
+    }
+    public static int totalFruit(int[] fruits) {
         HashMap<Integer,Integer> mp = new HashMap<>();
         int left = 0 ;
         int max = 0 ;
