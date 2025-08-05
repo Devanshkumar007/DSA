@@ -1,6 +1,6 @@
 class Solution {
     public int totalFruit(int[] fruits) {
-        LinkedHashMap<Integer,Integer> mp = new LinkedHashMap<>(2);
+        HashMap<Integer,Integer> mp = new HashMap<>(2);
         int left = 0 ;
         int max = 0 ;
         for(int i=0; i<fruits.length ; i++){
