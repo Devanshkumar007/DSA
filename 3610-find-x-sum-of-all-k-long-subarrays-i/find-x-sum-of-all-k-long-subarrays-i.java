@@ -1,40 +1,53 @@
 class Solution {
     public int[] findXSum(int[] nums, int k, int x) {
-        int n = nums.length;
-        int[] ans = new int[n - k + 1];
-        
-        for (int i = 0; i <= n - k; i++) {
-            // Count frequency in current window
-            Map<Integer, Integer> freq = new HashMap<>();
-            for (int j = i; j < i + k; j++) {
-                freq.put(nums[j], freq.getOrDefault(nums[j], 0) + 1);
-            }
+        int[] result = new int[nums.length - k + 1];
 
-            // Sort by frequency desc, then value desc
-            List<Map.Entry<Integer, Integer>> list = new ArrayList<>(freq.entrySet());
-            list.sort((a, b) -> {
-                if (!a.getValue().equals(b.getValue())) {
-                    return b.getValue() - a.getValue(); // higher freq first
-                }
-                return b.getKey() - a.getKey(); // if tie, larger value first
-            });
-
-            // Get top x elements
-            Set<Integer> topX = new HashSet<>();
-            for (int j = 0; j < Math.min(x, list.size()); j++) {
-                topX.add(list.get(j).getKey());
-            }
-
-            // Sum elements in window that are in top x
-            int sum = 0;
-            for (int j = i; j < i + k; j++) {
-                if (topX.contains(nums[j])) {
-                    sum += nums[j];
-                }
-            }
-
-            ans[i] = sum;
+        for (int i = 0; i < result.length; i++) {
+            int left = i, right = i + k - 1;
+            result[i] = findXSumofSubArray(nums, left, right, x);
         }
-        return ans;
+
+        return result;
+    }
+
+    private int findXSumofSubArray(int[] nums, int left, int right, int x) {
+        int sum = 0, distinctCount = 0;
+        int[] freq = new int[51]; 
+
+        for (int i = left; i <= right; i++) {
+            sum += nums[i];
+            if (freq[nums[i]] == 0) {
+                distinctCount++;
+            }
+            freq[nums[i]]++;
+        }
+
+        if (distinctCount < x) {
+            return sum;
+        }
+
+        sum = 0;
+        for (int pick = 0; pick < x; pick++) {
+            int bestFreq = -1;
+            int bestVal = -1;
+
+            for (int val = 50; val >= 1; val--) {
+                if (freq[val] > bestFreq) {
+                    bestFreq = freq[val];
+                    bestVal = val;
+                }
+            }
+
+            if (bestVal != -1) {
+                sum += bestVal * bestFreq;
+                freq[bestVal] = 0;
+            }
+        }
+        
+        return sum;
     }
 }
+// TC : O(n - k + 1) * findXSumofSubArray() => O(n) * findXSumofSubArray()
+// findXSumofSubArray() =>  O(k + 50 * x) ~ O(k + x)
+// Total TC : O(n * (k + x))
+// SC : O(n - k + 1) * O(51) ~ O(n)
