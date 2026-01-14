@@ -4,10 +4,10 @@ class Solution {
 		for(int i=0; i<s.length(); i++) {
 			char curr= s.charAt(i);
 			if(curr=='(' || curr=='{' || curr=='[') st.push(curr);
-			else if(!st.isEmpty() && curr==')' && st.peek()!='(' ) return false; 
-			else if(!st.isEmpty() && curr=='}' && st.peek()!='{') return false; 
-			else if(!st.isEmpty() && curr==']' && st.peek()!='[') return false;
 			else if(st.isEmpty()) return false;
+			else if(curr==')' && st.peek()!='(' ) return false; 
+			else if(curr=='}' && st.peek()!='{') return false; 
+			else if(curr==']' && st.peek()!='[') return false;
             else st.pop();
 		}
 		return st.isEmpty();
